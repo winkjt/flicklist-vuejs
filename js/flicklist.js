@@ -10,16 +10,12 @@ var api = {
  * if successful, prints the results to the console
  */
 function testTheAPI() {
-	$.ajax({
-		url: api.root + "/discover/movie",
-		data: {
-			api_key: api.token,
-		},
-		success: function(response) {
+	fetch(`${api.root}/discover/movie?api_key=${api.token}`)
+		.then(resp => resp.ok ? resp : Promise.reject(resp))
+		.then(function(response) {
 			console.log("We got a response from The Movie DB!");
 			console.log(response);
-		}
-	});
+		})
 }
 
 
