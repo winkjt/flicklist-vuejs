@@ -35,8 +35,7 @@ var flicklistView = new Vue({
 		},
 		// TODO 5
 		// make a method to use when a "Add to Watchlist" button is clicked
-		// It should accept a movie as a parameter, and
-		// 1. add that item to the watchlistItems list,
-		// 2. remove that item from the browseItems list.
+		// It should accept a movie as a parameter, and add that item to
+		// the watchlistItems list,
 	},
 });
