@@ -3,36 +3,56 @@
 <head>
   <meta charset="utf-8"/>
 
-  <script src="https://code.jquery.com/jquery-2.2.3.js"></script>  
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
   <title>FlickList</title>
 </head>
 <body>
-
-  <header>
-    <h1>FlickList</h1>
-    <p>Keep a list of all the movies you've been meaning to watch.</p>
-  </header>
-
-  <section id="section-watchlist">
+  <div id="mount-target">
     <header>
-      <h2>My Watchlist</h2>
-      <hr/>
+      <h1>FlickList</h1>
+      <p>Keep a list of all the movies you've been meaning to watch.</p>
     </header>
 
-    <ul></ul>
-  </section>
+    <section id="section-watchlist">
+      <header>
+        <h2>My Watchlist</h2>
+        <hr/>
+      </header>
 
-  <!-- 
-  TODO 1
-  Add another section, very similar to the one above, for the user to browse movies
-  Give it an id of "section-browse"
-  It should display "Browse Movies" in large text
-  It should contain an empty unordered list
-  -->
-  
+      <ul>
+        <!--
+        TODO 7
+        Make an <li> for each movie in watchList
+        -->
+      </ul>
+    </section>
 
+    <!--
+    TODO 1
+    Add another section, very similar to the one above, for the user to browse movies
+    Give it an id of "section-browse"
+    It should display "Browse Movies" in large text
+    It should contain an empty unordered list
+    -->
+    <!--
+    TODO 3
+    Inside the unordered list in your new "section-browse",
+    use a v-for pattern to make list items for each movie in browseItems
+    -->
+    <!--
+    TODO 4
+    Inside each of those list items, add a button that
+    says "Add to Watchlist"
+    -->
+    <!--
+    TODO 6
+    Wire up the method you just made using an @click
+    handler on each of your <li> tags. Make sure to pass
+    the movie into the function.
+    -->
+  </div>
   <script src="js/flicklist.js"></script>
 
-</body> 
+</body>
 </html>

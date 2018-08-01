@@ -1,71 +1,42 @@
 
-
-var model = {
-  watchlistItems: [],
-  browseItems: []
-}
-
-
 var api = {
   root: "https://api.themoviedb.org/3",
   token: "TODO" // TODO 0 put your api key here
 }
 
+var flicklistView = new Vue({
+	el: '#mount-target',
+	data: function() {
+		return {
+			// This is the data model.
+			// Whenever it changes, Vue will automatically re-render
+			// the html for us.
+			watchlistItems: [],
+			browseItems: []
+		};
+	},
+	methods: {
+		discoverMovies: function () {
+			/**
+			 * Makes an AJAX request to themoviedb.org, asking for some movies
+			 * if successful, updates the data.browseItems appropriately
+			 */
 
-/**
- * Makes an AJAX request to themoviedb.org, asking for some movies
- * if successful, updates the model.browseItems appropriately, and then invokes
- * the callback function that was passed in
- */
-function discoverMovies(callback) {
-	$.ajax({
-		url: api.root + "/discover/movie",
-		data: {
-			api_key: api.token,
+			fetch(`${api.root}/discover/movie?api_key=${api.token}`)
+					.then(resp => resp.ok ? resp : Promise.reject(resp))
+					.then((response) => {
+						console.log("We got a response from The Movie DB!");
+						console.log(response);
+						// TODO 2
+						// update this.browseItems, setting it equal to the movies we recieved in the response
+
+
+					});
 		},
-		success: function(response) {
-			console.log("We got a response from The Movie DB!");
-			console.log(response);
-			
-			// TODO 2
-			// update the model, setting its .browseItems property equal to the movies we recieved in the response
-			
-			// invoke the callback function that was passed in. 
-			callback();
-		}
-	});
-  
-}
-
-
-/**
- * re-renders the page with new content, based on the current state of the model
- */
-function render() {
-  // TODO 7
-  // clear everything from both lists
-  
-  // TODO 6
-  // for each movie on the user's watchlist, insert a list item into the <ul> in the watchlist section
-  
-  // for each movie on the current browse list, 
-  model.browseItems.forEach(function(movie) {
-		// TODO 3
-		// insert a list item into the <ul> in the browse section
-		
-		// TODO 4
-		// the list item should include a button that says "Add to Watchlist"
-		
 		// TODO 5
-		// when the button is clicked, this movie should be added to the model's watchlist and render() should be called again
-  });
-  
-}
-
-
-// When the HTML document is ready, we call the discoverMovies function,
-// and pass the render function as its callback
-$(document).ready(function() {
-  discoverMovies(render);
+		// make a method to use when a "Add to Watchlist" button is clicked
+		// It should accept a movie as a parameter, and
+		// 1. add that item to the watchlistItems list,
+		// 2. remove that item from the browseItems list.
+	},
 });
-
