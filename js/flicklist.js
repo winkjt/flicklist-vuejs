@@ -23,7 +23,7 @@ var flicklistView = new Vue({
 			 */
 
 			fetch(`${api.root}/discover/movie?api_key=${api.token}`)
-					.then(resp => resp.ok ? resp : Promise.reject(resp))
+					.then(resp => resp.ok ? resp.json() : Promise.reject(resp))
 					.then((response) => {
 						console.log("We got a response from The Movie DB!");
 						console.log(response);
