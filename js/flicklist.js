@@ -38,4 +38,8 @@ var flicklistView = new Vue({
 		// It should accept a movie as a parameter, and add that item to
 		// the watchlistItems list,
 	},
+	mounted: function() {
+		// call discoverMovies when things start up
+		this.discoverMovies();
+	},
 });
