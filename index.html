@@ -21,36 +21,29 @@
       </header>
 
       <ul>
-        <!--
-        TODO 7
-        Make an <li> for each movie in watchList
-        -->
+        <li v-for="title in watchlistItems">
+          <p>{{ title }}</p>
+        </li>
       </ul>
     </section>
 
-    <!--
-    TODO 1
-    Add another section, very similar to the one above, for the user to browse movies
-    Give it an id of "section-browse"
-    It should display "Browse Movies" in large text
-    It should contain an empty unordered list
-    -->
-    <!--
-    TODO 3
-    Inside the unordered list in your new "section-browse",
-    use a v-for pattern to make list items for each movie in browseItems
-    -->
-    <!--
-    TODO 4
-    Inside each of those list items, add a button that
-    says "Add to Watchlist"
-    -->
-    <!--
-    TODO 6
-    Wire up the method you just made using an @click
-    handler on each of your <li> tags. Make sure to pass
-    the movie into the function.
-    -->
+    <section>
+      <header>
+        <h2>Browse Movies</h2>
+        <hr />
+      </header>
+
+      <ul>
+        <li v-for="movie in browseItems">
+          <p>
+            {{ movie.title }}
+            <button @click="addToWatchlist(movie.title)">
+              Add to Watchlist
+            </button>
+          </p>
+        </li>
+      </ul>
+    </section>
   </div>
   <script src="js/flicklist.js"></script>
 

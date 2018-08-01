@@ -1,7 +1,7 @@
 
 var api = {
   root: "https://api.themoviedb.org/3",
-  token: "TODO" // TODO 0 put your api key here
+  token: "f6bd21e39046f6a08df40d82ad8cffd3"
 }
 
 var flicklistView = new Vue({
@@ -23,19 +23,20 @@ var flicklistView = new Vue({
 			 */
 
 			fetch(`${api.root}/discover/movie?api_key=${api.token}`)
-					.then(resp => resp.ok ? resp : Promise.reject(resp))
+					.then(resp => resp.ok ? resp.json() : Promise.reject(resp))
 					.then((response) => {
 						console.log("We got a response from The Movie DB!");
 						console.log(response);
-						// TODO 2
-						// update this.browseItems, setting it equal to the movies we recieved in the response
 
+						this.browseItems = response.results;
 
 					});
 		},
-		// TODO 5
-		// make a method to use when a "Add to Watchlist" button is clicked
-		// It should accept a movie as a parameter, and add that item to
-		// the watchlistItems list,
+		addToWatchlist: function(movie) {
+			this.watchlistItems.push(movie);
+		},
+	},
+	mounted: function () {
+		this.discoverMovies();
 	},
 });
