@@ -53,14 +53,18 @@ var flicklistView = new Vue({
 
     },
     posterUrl: function(movie) {
-      // TODO 4b
+      // TODO 4b (done)
       // implement this function
 
-      return "http://images5.fanpop.com/image/photos/25100000/movie-poster-rapunzel-and-eugene-25184488-300-450.jpg"
-    },
+      var baseImageUrl = "http://image.tmdb.org/t/p/w300/";
+      return baseImageUrl + movie.poster_path;
+      },
 		addToWatchlist: function(movie) {
 			this.watchlistItems.push(movie);
-		},
+    },
+    removeFromWatchlist: function(movie) {
+      this.watchlistItems = this.watchlistItems.filter(m => m !== movie);
+    },
 	},
 	mounted: function () {
 		this.discoverMovies();
