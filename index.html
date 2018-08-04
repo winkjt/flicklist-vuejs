@@ -10,7 +10,7 @@
 </head>
 <body>
   <div id="mount-target">
-    <header>
+    <header id="big-header">
       <h1>FlickList</h1>
       <p>Keep a list of all the movies you've been meaning to watch.</p>
     </header>
@@ -22,14 +22,17 @@
       </header>
 
       <ul>
-        <li v-for="title in watchlistItems">
-          <!-- TODO (done) the p tag should have an "item-watchlist" class -->
-          <p class="item-watchlist">{{ title }}</p>
+        <!-- TODO (done) the li tag should have an "item-watchlist" class -->
+        <li
+          v-for="movie in watchlistItems"
+          class="item-watchlist"
+        >
+          <p>{{ movie.title }}</p>
         </li>
       </ul>
     </section>
 
-    <section>
+    <section id="section-browse">
       <header>
         <h2>Browse Movies</h2>
 
@@ -45,6 +48,8 @@
 
       <ul>
         <li v-for="movie in browseItems">
+          <hr />
+
           <h4>{{ movie.title }}</h4>
           <!--
             TODO 2 (done)
