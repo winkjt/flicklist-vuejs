@@ -14,6 +14,7 @@ var flicklistView = new Vue({
 			watchlistItems: [],
       browseItems: [],
       // TODO 8B
+      searchTerm: null,
 		};
 	},
 	methods: {
@@ -41,9 +42,19 @@ var flicklistView = new Vue({
       // This update will automatically trigger a re-render.
       console.log(`searching for movies with "${searchTerm}" in their title...`);
 
-      // TODO 9
+      // TODO 9 (done)
       // implement this function as described in the comment above
       // you can use the body of discoverMovies as a jumping off point
+      fetch(`${api.root}/search/movie?api_key=${api.token}&query=${searchTerm}`)
+      .then(resp => resp.ok ? resp.json() : Promise.reject(resp))
+      .then((response) => {
+        console.log("We got a response from The Movie DB!");
+        console.log(response);
+
+        this.browseItems = response.results;
+
+      });
+
     },
 		addToWatchlist: function(movie) {
 			this.watchlistItems.push(movie);

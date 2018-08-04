@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
 
   <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
-  <link rel="styleshee" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 
   <title>FlickList</title>
 </head>
@@ -23,8 +23,8 @@
 
       <ul>
         <li v-for="title in watchlistItems">
-          <!-- TODO the p tag should have an "item-watchlist" class -->
-          <p>{{ title }}</p>
+          <!-- TODO (done) the p tag should have an "item-watchlist" class -->
+          <p class="item-watchlist">{{ title }}</p>
         </li>
       </ul>
     </section>
@@ -34,28 +34,36 @@
         <h2>Browse Movies</h2>
 
         <!--
-          TODO 6
+          TODO 6 (done)
           add a <form> here for users to search for movies by title
         -->
+        <form>
+          <input type="text" v-model="searchTerm" />
+          <input type="submit" value="search" @click="searchMovies(searchTerm)" />
+        </form>
       </header>
 
       <ul>
         <li v-for="movie in browseItems">
           <h4>{{ movie.title }}</h4>
           <!--
-            TODO 2
+            TODO 2 (done)
             The button should be disabled if this movie
             is already in the user's watchlist
           -->
-          <button @click="addToWatchlist(movie)">
+          <button
+            @click="addToWatchlist(movie)"
+            :disabled="watchlistItems.includes(movie)"
+          >
             Add to Watchlist
           </button>
 
           <!--
-            TODO 1
+            TODO 1 (done)
             Create a paragraph containing the movie object's
             .overview value
           -->
+          <p>{{ movie.overview }}</p>
         </li>
       </ul>
     </section>
