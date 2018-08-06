@@ -2,68 +2,92 @@
 <html>
 <head>
   <meta charset="utf-8"/>
+
   <meta name=viewport content="width=device-width, initial-scale=1">
 
-  <script src="https://code.jquery.com/jquery-2.2.3.js"></script>  
+
+  <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/styles.css"/>
+
+  <link rel="stylesheet" href="css/styles.css" />
 
   <title>FlickList</title>
 </head>
 <body>
+  <div id="mount-target">
+    <header class="jumbotron">
+      <h1>FlickList</h1>
+      <p class="text-muted">Keep a list of all the movies you've been meaning to watch.</p>
+    </header>
 
+    <div class="container-fluid main-content">
 
-  <header class="jumbotron">
-    <h1>FlickList</h1>
-    <p class="text-muted">Keep a list of all the movies you've been meaning to watch.</p>
-  </header>
+      <div class="row">
 
+        <section class="col-md-5" id="section-watchlist">
+          <header>
+            <h2>My Watchlist</h2>
+            <hr/>
+          </header>
 
-  <div class="container-fluid main-content">
-    <div class="row">
+          <ul class="list-inline">
+            <li
+              v-for="movie in watchlistItems"
+              class="panel panel-default"
+            >
+              <div class="panel-heading">
+                <h6>{{ movie.title }}</h6>
+              </div>
+              <div class="panel-body">
+                <img class="img-responsive" :src="posterUrl(movie)" />
+                <button @click="removeFromWatchlist(movie)">
+                  I watched it
+                </button>
+              </div>
+            </li>
+          </ul>
+        </section>
 
-      <section id="section-watchlist" class="col-md-5">
-        <header>
-          <h2>My Watchlist</h2>
-          <hr/>
-        </header>
+        <section class="col-md-7" id="section-browse">
+          <header>
+            <h2>Browse Movies</h2>
 
-        <ul class="list-inline"></ul>
-      </section>
-  
-      <section id="section-browse" class="col-md-7">
-        <header>
-          <h2>Browse Movies</h2>
-
-          <!--
-          TODO 5
-          change the submit button so that it says "Search by Topic"
-          -->
-          <form id="form-search">
-            <div class="input-group">
-              <input type="text" class="form-control" name="query"/>
-              <span class="input-group-btn">
-                <input type="submit" class="btn btn-primary" value="Search By Title"/>
-              </span>
-            </div>
+            <form id="form-search">
+              <div class="input-group">
+                <input type="text" class="form-control" v-model="searchTerm" />
+                <span class="input-group-btn">
+                  <input
+                    type="submit" value="Search By Title"
+                    class="btn btn-primary"
+                    @click="searchMovies(searchTerm)"
+                  />
+                </span>
+              </div>
           </form>
-        </header>
+          </header>
 
-        <ul class="list-group"></ul>
-      </section>
-      
+          <ul class="list-group">
+            <li v-for="movie in browseItems" class="list-group-item">
+              <hr />
+
+              <h4>{{ movie.title }}</h4>
+              <button
+                class="btn btn-primary"
+                @click="addToWatchlist(movie)"
+                :disabled="watchlistItems.includes(movie)"
+              >
+                Add to Watchlist
+              </button>
+
+              <p>{{ movie.overview }}</p>
+            </li>
+          </ul>
+        </section>
+      </div>
     </div>
   </div>
-
   <script src="js/flicklist.js"></script>
-  <script>
-    $("#form-search").submit(function(evt) {
-      evt.preventDefault();
-      var query = $("#form-search input[name=query]").val();
-      searchMovies(query, render);
-    });
-  </script>
 
-</body> 
+</body>
 </html>
